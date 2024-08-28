@@ -13,4 +13,3 @@ GROUP BY
     EXTRACT(YEAR FROM job_posted_date),
     EXTRACT(MONTH FROM job_posted_date),
     job_schedule_type;
-/* test github */
