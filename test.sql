@@ -8,7 +8,9 @@ SELECT
 FROM 
     job_postings_fact
 WHERE 
-     (salary_hour_avg IS NOT NULL OR salary_year_avg IS NOT NULL) AND job_posted_date >= '2023-06-01'
+    salary_hour_avg IS NOT NULL
+    --AND salary_year_avg IS NOT NULL
+    --AND job_posted_date >= '2023-06-01'
 GROUP BY 
     EXTRACT(YEAR FROM job_posted_date),
     EXTRACT(MONTH FROM job_posted_date),
