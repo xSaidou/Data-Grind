@@ -49,6 +49,17 @@ GROUP BY
 
 
 
+
+-- This query calculates the average hourly and yearly salary for each job title
+-- and job location. It will return all columns from the job_postings_fact table
+-- as well as the average hourly and yearly salary for each job title and job
+-- location.
+--
+-- The query will only return rows where the salary_hourly_avg and salary_yearly_avg
+-- fields are greater than 0, because the average salary is meaningless if there
+-- are no valid salary data points.
+--
+-- The GROUP BY clause groups the results by job title and job location.
 SELECT
     job_title_short,
     job_location,
@@ -59,5 +70,4 @@ FROM
 WHERE salary_hour_avg > 0 OR salary_year_avg > 0
 GROUP BY
     job_title_short, job_location;
---HAVING
-   -- salary_hourly_avg > 0 OR salary_yearly_avg > 0;
+
