@@ -61,6 +61,7 @@ GROUP BY
 --
 -- The GROUP BY clause groups the results by job title and job location.
 SELECT
+    
     job_title_short,
     job_location,
     CEIL(AVG(salary_hour_avg)) AS avg_hourly,
@@ -71,3 +72,77 @@ WHERE salary_hour_avg > 0 OR salary_year_avg > 0
 GROUP BY
     job_title_short, job_location;
 
+
+
+
+
+
+-- This query calculates the average hourly and yearly salary for each job title,
+-- job location and month.
+--
+-- The query will only return rows where the salary_hourly_avg and salary_yearly_avg
+-- fields are greater than 0, because the average salary is meaningless if there
+-- are no valid salary data points.
+--
+-- The GROUP BY clause groups the results by job title, job location and month.
+SELECT 
+    job_title_short,
+    job_location,
+    EXTRACT(MONTH FROM job_posted_date) AS posted_month,
+    CEIL(AVG(salary_hour_avg)) AS avg_hourly,
+    CEIL(AVG(salary_year_avg)) AS avg_yearly
+FROM 
+    job_postings_fact
+WHERE salary_hour_avg > 0 OR salary_year_avg > 0
+GROUP BY 
+    job_title_short, job_location, posted_month;
+
+
+
+
+
+
+
+
+    -- This query calculates the average hourly and yearly salary for each job title,
+    -- job location and month, and the company name.
+    --
+    -- The query will only return rows where the salary_hourly_avg and salary_yearly_avg
+    -- fields are greater than 0, because the average salary is meaningless if there
+    -- are no valid salary data points.
+    --
+    -- The GROUP BY clause groups the results by job title, job location, and month.
+SELECT 
+    jpf.job_title_short,
+    jpf.job_location,
+    EXTRACT(MONTH FROM jpf.job_posted_date) AS posted_month,
+    cd.name As company_name,
+    CEIL(AVG(jpf.salary_hour_avg)) AS avg_hourly,
+    CEIL(AVG(jpf.salary_year_avg)) AS avg_yearly
+FROM 
+    job_postings_fact jpf
+INNER JOIN 
+    company_dim cd ON jpf.company_id = cd.company_id
+WHERE 
+    jpf.salary_hour_avg > 0 OR jpf.salary_year_avg > 0
+GROUP BY 
+    jpf.job_title_short, jpf.job_location, EXTRACT(MONTH FROM jpf.job_posted_date), cd.name;
+
+
+
+
+
+
+
+
+
+
+SELECT 
+    job_title_short,
+    ROUND(AVG(salary_year_avg),0) AS avg_yearly_salary
+FROM 
+    job_postings_fact
+WHERE 
+    salary_year_avg > 0
+GROUP BY 
+    job_title_short;

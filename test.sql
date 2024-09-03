@@ -125,3 +125,55 @@ FROM (
 ) AS ranked_skills
 WHERE skill_rank <= 5
 ORDER BY job_title_short, occurrence_count DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+WITH ranked_skills AS (
+  -- This query will return the top 5 skills for each job title
+  -- The results are grouped by job title and limited to 5 skills per job title
+  SELECT
+    jpf.job_title_short,
+    sd.skills,
+    COUNT(*) AS count,
+    ROW_NUMBER() OVER (PARTITION BY jpf.job_title_short ORDER BY COUNT(*) DESC) AS rank
+  FROM job_postings_fact jpf
+  INNER JOIN skills_job_dim sjd
+    ON jpf.job_id = sjd.job_id
+  INNER JOIN skills_dim sd
+    ON sjd.skill_id = sd.skill_id
+  GROUP BY jpf.job_title_short, sd.skills
+),
+avg_salaries AS (
+  -- This query will return the average salaries for each job title
+  SELECT
+    job_title_short,
+    CEIL(AVG(salary_hour_avg)) AS avg_hourly,
+    CEIL(AVG(salary_year_avg)) AS avg_yearly
+  FROM job_postings_fact
+  GROUP BY job_title_short
+)
+SELECT
+  rs.job_title_short,
+  STRING_AGG(rs.skills, ', ') AS top_5_skills,
+  asal.avg_hourly,
+  asal.avg_yearly
+FROM ranked_skills rs
+INNER JOIN avg_salaries asal
+  ON rs.job_title_short = asal.job_title_short
+WHERE rs.rank <= 5
+GROUP BY rs.job_title_short, asal.avg_hourly, asal.avg_yearly;
