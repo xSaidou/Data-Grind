@@ -250,3 +250,83 @@ GROUP BY
     -- group the results by job title and month
     EXTRACT(MONTH FROM jpf.job_posted_date), jpf.job_title_short
 
+
+
+
+
+
+
+
+
+
+/**
+ * This query calculates the total number of job postings for each job title
+ * and month the job was posted. It uses the job_postings_fact table to get
+ * the job title and the month the job was posted.
+ *
+ * The query will only return rows where the salary_hourly_avg and
+ * salary_yearly_avg fields are greater than 0, because the total number of
+ * job postings is meaningless if there are no valid salary data points.
+ *
+ * The GROUP BY clause groups the results by job title and month.
+ *
+ * The results are sorted by job title in ascending order.
+ */
+SELECT 
+    EXTRACT(MONTH FROM jpf.job_posted_date) AS posted_month,
+    jpf.job_title_short,
+    CEIL(AVG(jpf.salary_hour_avg)) AS avg_hourly,
+    CEIL(AVG(jpf.salary_year_avg)) AS avg_yearly,
+    COUNT(*) AS total_job_offers_month
+FROM 
+    job_postings_fact jpf
+WHERE 
+    jpf.salary_hour_avg > 0 OR jpf.salary_year_avg > 0
+GROUP BY 
+    jpf.job_title_short, EXTRACT(MONTH FROM jpf.job_posted_date)
+ORDER BY
+    posted_month;
+
+
+
+
+
+WITH job_postings_summary AS (
+    SELECT job_title_short, COUNT(*) AS total_job_postings
+    FROM job_postings_fact
+    GROUP BY job_title_short
+)
+SELECT job_title_short, total_job_postings
+FROM job_postings_summary
+ORDER BY total_job_postings DESC;
+
+
+
+
+
+
+
+
+WITH job_postings_summary AS (
+  SELECT 
+    job_title_short, 
+    EXTRACT(MONTH FROM job_posted_date) AS posted_month,
+    COUNT(*) AS jobs_per_month
+  FROM 
+    job_postings_fact
+  GROUP BY 
+    job_title_short,
+    EXTRACT(MONTH FROM job_posted_date)
+)
+SELECT 
+  job_title_short, 
+  posted_month, 
+  jobs_per_month
+FROM 
+  job_postings_summary
+ORDER BY 
+  job_title_short 
+  --posted_month;
+
+
+
