@@ -1,58 +1,54 @@
-My Data Analytics Learning Journey
+# **My Data Analytics Learning Journey**
 
 
 Welcome to my GitHub repository! This README documents my ongoing journey in learning and mastering key data analytics tools and languages. I'm currently focusing on SQL, Power BI, and Python, with the goal of becoming proficient in data analysis and visualization.
 
 
-🛠 Skills In Progress
+## **🛠 Skills In Progress**
 
 
-SQL
+### **SQL**
 
 
- Basic queries (SELECT, WHERE, GROUP BY)
-
- Joins (INNER, LEFT, RIGHT, FULL)
-
- Subqueries and CTEs
-
- Window functions
-
- Query optimization
+-Basic queries *(SELECT, WHERE, GROUP BY)*
+-Joins *(INNER, LEFT, RIGHT, FULL)*
+-Subqueries and CTEs
+-Window functions
+-Query optimization
 
 
-Power BI
+### **Power BI**
 
 
- Data import and transformation
+ -Data import and transformation
 
- Creating basic visualizations
+ -Creating basic visualizations
 
- DAX fundamentals (learning)
+ -DAX fundamentals *(learning)*
 
- Advanced DAX formulas (learning)
+ -Advanced DAX formulas *(learning)*
 
- Creating custom visuals
-
-
-Python (CURRENTLY LEARNING)
+ -Creating custom visuals
 
 
- Basic syntax and data types
+### **Python (CURRENTLY LEARNING)**
 
- Control structures (if/else, loops)
 
- Functions and modules
+ -Basic syntax and data types
 
- Object-Oriented Programming
+ -Control structures *(if/else, loops)*
 
- Data analysis with pandas
+ -Functions and modules
 
- Data visualization with matplotlib and seaborn
+ -Object-Oriented Programming
+
+ -Data analysis with pandas
+
+ -Data visualization with matplotlib and seaborn
 
 
 
-📚 Current Learning Resources
+## **📚 Current Learning Resources**
 
 SQL: [Luke](https://www.youtube.com/@LukeBarousse)
 
@@ -62,17 +58,17 @@ Python: [Luke](https://www.youtube.com/@LukeBarousse)
 
 
 
-🚀 Projects
+## **🚀 Projects**
 
 [Data nerds] - SQL-focused big tutorial about, you guessed it - SQL. 
 
 [Data workshop] - Power BI dashboard
 
-[Python drill] - Learning Python data analysis from a scratch. (WORK IN PROGRESS)
+[Python drill] - Learning Python data analysis from a scratch. *(WORK IN PROGRESS)*
 
 
 
-🎯 Next Steps
+## **🎯 Next Steps**
 
 Dive deeper into advanced SQL concepts
 
@@ -84,7 +80,7 @@ Learn Tableau, AWS, Azure, all Python related libs for DA
 
 
 
-💡 Let's Connect
+## **💡 Let's Connect**
 
 
 I'm always eager to learn and collaborate with fellow data enthusiasts. Feel free to reach out if you have any questions, suggestions, or just want to chat about data analytics!
