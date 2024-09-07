@@ -11,9 +11,13 @@ Welcome to my GitHub repository! This README documents my ongoing journey in lea
 
 
 -Basic queries *(SELECT, WHERE, GROUP BY)*
+
 -Joins *(INNER, LEFT, RIGHT, FULL)*
+
 -Subqueries and CTEs
+
 -Window functions
+
 -Query optimization
 
 
